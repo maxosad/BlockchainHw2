@@ -1,6 +1,9 @@
 
 ```
 
+  npx hardhat test
+
+
   AucEngine
 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
     √ sets owner
@@ -40,4 +43,5 @@
       at listOnTimeout (node:internal/timers:528:9)
       at processTimers (node:internal/timers:502:7)
       at Context.<anonymous> (test\AucEngine-test.js:74:13)
+
 ```
