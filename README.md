@@ -1,4 +1,4 @@
-
+The Dutch auctions Constructor. The interested person creates an auction, indicating the item, duration, price reduction and after how long the price will be reduced. If duration has passed, then the auction ends. If the auction ended with a sale, then we forward 90% of the funds to the auction creator
 ```
 
   npx hardhat test
