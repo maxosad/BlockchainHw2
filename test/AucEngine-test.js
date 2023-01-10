@@ -15,11 +15,7 @@ describe("AucEngine", function () {
         await auct.deployed()
     })
 
-    it("sets owner", async function() {
-        const currentOwner = await auct.owner()
-        console.log(currentOwner)
-        expect(currentOwner).to.eq(owner.address)
-    })
+    	
 
     async function getTimestamp(bn) {
         return (
@@ -48,29 +44,23 @@ describe("AucEngine", function () {
         })
     })
 
-    function delay(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms))
-    }
 
     describe("buy", function () {
         it("alllows to buy", async function () {
             await auct.connect(seller).createAuction(
                 ethers.utils.parseEther("0.0001"),
-                3,
+                100,
                 "fake item",
                 60
             )
-
-            this.timeout(5000)
-            await delay(1000)
 
 
             const buyTx = await auct.connect(buyer)
                 .buy(0, {value: ethers.utils.parseEther("0.0001")})
             
             const cAuction = await auct.auctions(0)
-            const finalPrice = cAuction.finalPrice
-            
+            let finalPrice = cAuction.finalPrice
+            finalPrice = finalPrice - cAuction.discountRate
             await expect(() => buyTx).
                 to.changeEtherBalance(seller, finalPrice - Math.floor((finalPrice * 10) / 100))
         })

@@ -67,6 +67,7 @@ contract AucEngine {
         require(!cAuction.stopped, "auction already stopped");
         require(block.timestamp < cAuction.endsAt, "ended!");
         uint cPrice = getPriceFor(index);
+        //uint cPrice = 100000000000000;
         require(msg.value >= cPrice, "not enough funds");
         cAuction.stopped = true;
         cAuction.finalPrice = cPrice;
@@ -75,7 +76,9 @@ contract AucEngine {
             payable(msg.sender).transfer(refund);
         }
         cAuction.seller.transfer(
-            cPrice - ((cPrice * FEE) / 100)
+            cPrice - ((cPrice * FEE) /100)
+            // 90000000000000
+            //   100000000000000
         );
 
         emit AuctionEnded(index, cPrice, msg.sender);
